@@ -1,0 +1,14 @@
+{
+  "name": "jsnotes",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Gerd Zschaler <gzschaler@googlemail.com>",
+  "main": "app.js",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "docco-husky": "~0.3.3",
+    "grunt-contrib-watch": "~0.5.3",
+    "express": "~3.4.8"
+  }
+}
