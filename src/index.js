@@ -126,12 +126,32 @@ var Counter = function() {
 }();                                   // immediate invocation of the anonymous function
 
 // ## The Prototype Chain
+
 // Every object is linked to a prototype object, which serves as a blueprint for the object's behaviour.
 // When a property or a method cannot be found in an object itself, the interpreter tries to find it in the object's
 // prototype–and the prototype's prototype, and the prototype's prototype's prototype and so on. This is called
 // the prototype chain.
+var obj = { foo: 'bar' };              // no member `hasOwnProperty`
+obj.hasOwnProperty('foo');             // calls `Object.prototype.hasOwnProperty`, returning true
 
-// ## Prototypical Inheritance
+// Object literals are linked to `Object.prototype`, i.e. their prototype refers to `Object.prototype`.
+// Functions are linked to `Function.prototype`, which itself is linked to `Object.prototype`.
+var myFunc = function(arg1, arg2) {
+    console.log('You called myFunc with', arg1, arg2);
+};
+myFunc.apply(1, 2);                    // calls `Function.prototype.apply`
+
+// ### Custom objects (JavaScript "classes")
+// There is no class concept in JavaScript. However, functions can be invoked using the `new` keyword. This creates
+// a new object whose prototype
+var Button = function(label) {
+    this.label = label;
+};
+Button.prototype.click = function() {
+    console.log('You clicked button ' + this.label);
+};
+
+// ### Prototypical Inheritance
 
 // ## Common Pitfalls
 // ### Variable hoisting
