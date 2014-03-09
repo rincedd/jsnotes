@@ -3,7 +3,12 @@
 // ## Types
 
 // JavaScript's has 5 primitive types: `number`, `string`, `boolean`, `null`, and `undefined`.
-var aNumber = 1.3, anotherNumber = 10, aString = 'Hello world', theTruth = true, nothing = null, evenLess = undefined;
+var aNumber = 1.3,
+    anotherNumber = 10,
+    aString = 'Hello world',
+    theTruth = true,
+    nothing = null,
+    evenLess = undefined;
 
 // Everything else is an _object_, including functions and arrays.
 var anObjectLiteral = {
@@ -50,7 +55,7 @@ var myFunction = function() {           // <-- a new scope starts here
     var result = nested();             // variable declaration is hoisted to beginning of scope, `result` is set to 17
 };
 
-// Variables do not need to be defined using a var statement. In this case, **they will become global variables**.
+// Variables do not need to be declared using a `var` statement. If `var` is omitted, **they will become global variables**.
 // Therefore, always use the var statement unless you have a very good reason not to do so.
 var creatingGlobals = function() {
     var aLocalVariable = 10;
@@ -68,14 +73,14 @@ var myFunctionWithContext = function() {
     var self = this;                    // the value of `this` is defined when the function is called
 
     function nested() {
-        if (self === this) {            // this `this` is defined when `nested()` is called and may not equal the parent scope `this`!
+        if (self === this) {            // this `this` is defined when `nested()` is called and usually does not equal the parent scope `this`!
             console.log('You were lucky');
         } else {
             console.log('Beware');
         }
     }
 
-    nested();                          // prints 'You were lucky'
+    nested();                          // prints 'You were lucky' if the outer function is invoked as myFunctionWithContext()
 
     nested.call({});                   // prints 'Beware'
 };
@@ -85,7 +90,7 @@ var myFunctionWithContext = function() {
 var greet = function() {
     console.log('Hi, my name is', this.firstName);
 };
-greet();                               // prints 'Hi, my name is undefined'
+greet();                               // prints 'Hi, my name is undefined' (`this` refers to `window`)
 greet.call({ firstName: 'Bob' });      // prints 'Hi, my name is Bob'
 
 // To ensure a certain execution context, a function can be bound to a specific value of this. This creates a new
@@ -109,8 +114,8 @@ var foobar = function() {
 }();                                   // we immediately invoke the outer function, so `foobar` holds the returned inner function
 
 // Returning the nested function makes it available for later invocation. Therefore, the local variable `count` must not
-// be garbage collected. Instead, the parent scope is attached to the returned function, creating a closure. This is
-// called the *scope chain*.
+// be garbage collected. Instead, the parent scope is attached to the returned function in order to be accessible when
+// the function is invoked, creating a closure. This is called the *scope chain*.
 foobar();                              // prints 'I was called 1 times'
 foobar();                              // prints 'I was called 2 times'
 foobar();                              // prints 'I was called 3 times'
@@ -131,19 +136,22 @@ var Counter = function() {
 // When a property or a method cannot be found in an object itself, the interpreter tries to find it in the object's
 // prototype–and the prototype's prototype, and the prototype's prototype's prototype and so on. This is called
 // the prototype chain.
-var obj = { foo: 'bar' };              // no member `hasOwnProperty`
-obj.hasOwnProperty('foo');             // calls `Object.prototype.hasOwnProperty`, returning true
+var myArray = [1, 2, 3];               // no direct members `join` nor `hasOwnProperty`
+myArray.join(',');                     // calls `Array.prototype.join`, returning '1,2,3'
 
 // Object literals are linked to `Object.prototype`, i.e. their prototype refers to `Object.prototype`.
-// Functions are linked to `Function.prototype`, which itself is linked to `Object.prototype`.
+// Arrays are linked to `Array.prototype`, which itself is linked to `Object.prototype`.
+myArray.hasOwnProperty('join');        // calls `Object.prototype.hasOwnProperty`, returning false
+
+// Functions are linked to `Function.prototype`, which itself is linked to `Object.prototype` again.
 var myFunc = function(arg1, arg2) {
     console.log('You called myFunc with', arg1, arg2);
 };
 myFunc.apply(1, 2);                    // calls `Function.prototype.apply`
 
-// ### Custom objects (JavaScript "classes")
+// ### Constructor invocation
 // There is no class concept in JavaScript. However, functions can be invoked using the `new` keyword. This creates
-// a new object whose prototype
+// a new object whose prototype is set to the function's `prototype` member.
 var Button = function(label) {
     this.label = label;
 };
@@ -151,7 +159,43 @@ Button.prototype.click = function() {
     console.log('You clicked button ' + this.label);
 };
 
-// ### Prototypical Inheritance
+var btn = new Button('Cancel');        // by convention, functions meant to be called as constructors begin with a capital letter
+btn.click();                           // prints 'You clicked button Cancel'
 
-// ## Common Pitfalls
-// ### Variable hoisting
+// ### Prototypal Inheritance
+
+// In JavaScript, object inheritance can be achieved in various ways. The language can be used to mimic the concept
+// of classes and classical inheritance. The prototype chain, however, provides a powerful means of establishing
+// inheritance relations directly between objects.
+var createDerivedObject = function(baseObj) {     // helper function to set up 'inheritance' prototype chain
+    var F = function() {};                        // empty constructor function
+    F.prototype = baseObj;                        // use `baseObj` as the derived object's prototype
+    return new F();                               // create and return derived object
+};
+
+// Using this pattern, any object literal can serve as a base object.
+var aWidget = {
+    name: '',
+    show: function() {
+        console.log('Showing widget ' + this.name);
+    }
+};
+
+// We only specify the behavioural differences in the derived object, relying on the prototype chain for the common behaviour.
+var aClickableWidget = createDerivedObject(aWidget);
+aClickableWidget.name = 'Click Widget';
+aClickableWidget.click = function() {
+    console.log('You clicked widget ' + this.name);
+};
+
+aClickableWidget.show();               // calls `aClickableWidget.prototype.show`, which is identical to `aWidget.show`
+
+// There are various other ways of achieving inheritance in JavaScript, some of them allowing for truly private member
+// variables and references to base object members (i.e., a `super()` functionality). For an overview,
+// see ["JavaScript: The Good Parts" by Douglas Crockford](http://www.oreilly.de/catalog/9780596517748).
+
+// # References
+// 1. [JavaScript: The Good Parts by Douglas Crockford](http://www.oreilly.de/catalog/9780596517748) is a very
+//    good read on the good, bad and awful things in JavaScript.
+// 2. [MDN JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) is a helpful
+//    language reference and documentation.
