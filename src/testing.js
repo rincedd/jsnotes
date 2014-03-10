@@ -25,6 +25,36 @@ describe('The developer console', function() {           // a test suite
 
 // ## Spec runner setup
 
+// The simplest way to run Jasmine tests is to set them up in a spec runner HTML file. This is basically a
+// HTML file that includes Jasmine's CSS and JS (`jasmine.js`, `jasmine-html.js`), all your JavaScript sources
+// and spec files.
+// Then, the Jasmine test runner and HTML reporter is created and executed in the `window.onload` event callback.
+(function () {
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.updateInterval = 1000;
+
+    var htmlReporter = new jasmine.HtmlReporter();
+
+    jasmineEnv.addReporter(htmlReporter);
+
+    jasmineEnv.specFilter = function (spec) {
+        return htmlReporter.specFilter(spec);
+    };
+
+    var currentWindowOnload = window.onload;
+
+    window.onload = function () {
+        if (currentWindowOnload) {
+            currentWindowOnload();
+        }
+        jasmineEnv.execute();
+    };
+})();
+
+// If you want to test code that uses jQuery, include `jasmine-jquery.js` as well.
+
+// To run your test suite, open the spec runner HTML in a browser.
+
 // ## Headless testing
 
 // ## Other test frameworks
