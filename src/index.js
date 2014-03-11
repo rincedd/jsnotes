@@ -195,8 +195,22 @@ aClickableWidget.show();               // calls `aClickableWidget.prototype.show
 // variables and references to base object members (i.e., a `super()` functionality). For an overview,
 // see ["JavaScript: The Good Parts" by Douglas Crockford](http://www.oreilly.de/catalog/9780596517748).
 
+// # Useful tools
+
+// * [JSHint](http://www.jshint.com) is a JavaScript code sniffer and quality tool. It is a fork of Douglas Crockford's
+//   original JSLint, which is often considered too biased by Crockford's own style. It integrates nicely with most
+//   current IDEs.
+var anotherFunction = function() {
+    anAccidentallyGlobalVariable = 42;      // JSHint will complain about implicitly declared global variable here!
+};
+
+// * [Grunt](http://gruntjs.com) is a JavaScript task runner that can be used to automate every-day (build) tasks with
+//   the help of JavaScript and [NodeJS](http://nodejs.org)
+// * Unit testing and test runners: see testing.js
+
 // # References
 // 1. [JavaScript: The Good Parts by Douglas Crockford](http://www.oreilly.de/catalog/9780596517748) is a very
 //    good read on the good, bad and awful things in JavaScript.
 // 2. [MDN JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) is a helpful
 //    language reference and documentation.
+// 3. [DevDocs](http://devdocs.io) is a customizable combined API reference of many current web frameworks.
