@@ -147,9 +147,10 @@ myArray.hasOwnProperty('join');        // calls `Object.prototype.hasOwnProperty
 var myFunc = function(arg1, arg2) {
     console.log('You called myFunc with', arg1, arg2);
 };
-myFunc.apply(1, 2);                    // calls `Function.prototype.apply`
+myFunc.apply([1, 2]);                    // calls `Function.prototype.apply`
 
 // ### Constructor invocation
+
 // There is no class concept in JavaScript. However, functions can be invoked using the `new` keyword. This creates
 // a new object whose prototype is set to the function's `prototype` member.
 var Button = function(label) {

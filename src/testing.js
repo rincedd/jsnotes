@@ -23,6 +23,27 @@ describe('The developer console', function() {           // a test suite
 // Jasmine provides many different "matchers", e.g. `toBe()`, `toEqual()`, `toContain()`, etc. They
 // are described in the [Jasmine documentation](http://jasmine.github.io/2.0/introduction.html).
 
+// Jasmine also provides _spies_ to test whether methods have been called and with the correct arguments.
+describe('A simple logger', function() {
+    var logger = {
+        logLevel: 'debug',
+        debug: function(message) {
+            if (this.logLevel === 'debug') {
+                console.log(message);
+            }
+        }
+    };
+
+    it('should log debug messages when log level is set to debug', function() {
+        spyOn(console, 'log');                         // wrap `console.log` in a spy function to spy on it
+        logger.debug('test message');
+
+        // Jasmine spies come with matching matchers.
+        expect(console.log).toHaveBeenCalled();
+        expect(console.log).toHaveBeenCalledWith('test message');
+    })
+});
+
 // ## Spec runner setup
 
 // The simplest way to run Jasmine tests is to set them up in a spec runner HTML file. This is basically a
@@ -57,4 +78,22 @@ describe('The developer console', function() {           // a test suite
 
 // ## Headless testing
 
-// ## Other test frameworks
+// To integrate JavaScript tests in automated builds, they have to be run in a "headless" browser.
+// There are headless versions of the major browsers/rendering engines, i.e., WebKit, Firefox, and Internet Explorer.
+// The easiest to install and use is the headless WebKit browser [PhantomJS](http://phantomjs.org).
+
+// ## Other test frameworks and runners
+
+// Apart from Jasmine, there are mainly two other notable test frameworks:
+//
+// * [Mocha](http://visionmedia.github.io/mocha), optionally with [Chai](http://chaijs.com) and [SinonJS](http://sinonjs.org),
+//   is quite similar to Jasmine but more fun :-)
+// * [QUnit](https://qunitjs.com) is a powerful unit testing framework used by jQuery
+//
+// To automate both browser and headless testing, a number of test runners have been developed:
+//
+// * [Karma](http://karma-runner.github.io) is a test runner that can simultaneously run tests in different browsers
+//   (including headless ones). It has been developed with an emphasis on AngularJS but can be used for any JavaScript
+//   project. It is easily integrated in automated build pipelines.
+// * [BusterJS](http://busterjs.org) is another test runner with additional testing features, which is
+//   currently under development.
