@@ -74,7 +74,8 @@ describe('A simple logger', function() {
 
 // If you want to test code that uses jQuery, include `jasmine-jquery.js` as well.
 
-// To run your test suite, open the spec runner HTML in a browser.
+// To run your test suite manually, open the spec runner HTML in a browser. In order to integrate JavaScript
+// tests in an automated build setup (e.g. Jenkins), a _test runner_ should be used (see below).
 
 // ## Headless testing
 
@@ -92,8 +93,8 @@ describe('A simple logger', function() {
 //
 // To automate both browser and headless testing, a number of test runners have been developed:
 //
-// * [Karma](http://karma-runner.github.io) is a test runner that can simultaneously run tests in different browsers
-//   (including headless ones). It has been developed with an emphasis on AngularJS but can be used for any JavaScript
+// * [Karma](http://karma-runner.github.io) is a test runner that can simultaneously run tests in many different browsers
+//   (including headless ones). It has been developed together with AngularJS but can be used for any JavaScript
 //   project. It is easily integrated in automated build pipelines.
 // * [BusterJS](http://busterjs.org) is another test runner with additional testing features, which is
 //   currently under development.
