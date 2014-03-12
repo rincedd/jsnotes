@@ -17,9 +17,14 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerMultiTask('doc', function() {
-        var docco = require('docco-husky'),
-            done = this.async();
+        var done = this.async();
 
-        docco.document(this.filesSrc, done);
+        grunt.util.spawn({
+            cmd: 'node_modules/.bin/docco-husky',
+            args: this.filesSrc,
+            opts: {
+                stdio: 'inherit'
+            }
+        }, done);
     });
 };
