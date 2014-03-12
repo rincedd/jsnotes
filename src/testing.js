@@ -25,14 +25,19 @@ describe('The developer console', function() {           // a test suite
 
 // Jasmine also provides _spies_ to test whether methods have been called and with the correct arguments.
 describe('A simple logger', function() {
-    var logger = {
-        logLevel: 'debug',
-        debug: function(message) {
-            if (this.logLevel === 'debug') {
-                console.log(message);
+    var logger;
+
+    // Setup and teardown functions can be registered through `beforeEach()` and `afterEach()`.
+    beforeEach(function() {
+        logger = {
+            logLevel: 'debug',
+            debug: function(message) {
+                if (this.logLevel === 'debug') {
+                    console.log(message);
+                }
             }
-        }
-    };
+        };
+    });
 
     it('should log debug messages when log level is set to debug', function() {
         spyOn(console, 'log');                         // wrap `console.log` in a spy function to spy on it
@@ -41,7 +46,15 @@ describe('A simple logger', function() {
         // Jasmine spies come with matching matchers.
         expect(console.log).toHaveBeenCalled();
         expect(console.log).toHaveBeenCalledWith('test message');
-    })
+    });
+
+    it('should not log debug messages when log level is set to error', function() {
+        logger.logLevel = 'error';
+        spyOn(console, 'log');
+        logger.debug('test message');
+
+        expect(console.log).not.toHaveBeenCalled();
+    });
 });
 
 // ## Spec runner setup
@@ -50,7 +63,7 @@ describe('A simple logger', function() {
 // HTML file that includes Jasmine's CSS and JS (`jasmine.js`, `jasmine-html.js`), all your JavaScript sources
 // and spec files.
 // Then, the Jasmine test runner and HTML reporter is created and executed in the `window.onload` event callback.
-(function () {
+(function() {
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.updateInterval = 1000;
 
@@ -58,13 +71,13 @@ describe('A simple logger', function() {
 
     jasmineEnv.addReporter(htmlReporter);
 
-    jasmineEnv.specFilter = function (spec) {
+    jasmineEnv.specFilter = function(spec) {
         return htmlReporter.specFilter(spec);
     };
 
     var currentWindowOnload = window.onload;
 
-    window.onload = function () {
+    window.onload = function() {
         if (currentWindowOnload) {
             currentWindowOnload();
         }
