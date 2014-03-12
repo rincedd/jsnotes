@@ -1,0 +1,171 @@
+<!DOCTYPE html><html><head><title>index.js</title><meta http-equiv="Content-Type" content="text/html" charset="UTF-8"><link rel="stylesheet" media="all" href="../docco.css"></head><body><div id="container"><div id="background"></div><div id="jump_to">Jump To &hellip;<div id="jump_wrapper"><div id="jump_page"><a href="../index.html" class="source"><span class="file_name">README</span></a><a href="../src/index.js.html" class="source selected"><span class="base_path">src / </span><span class="file_name">index.js</span></a><a href="../src/testing.js.html" class="source "><span class="base_path">src / </span><span class="file_name">testing.js</span></a></div></div></div><table cellpadding="0" cellspacing="0"><thead><tr><th class="docs"><h1>index.js</h1><div class="filepath">src/</div></th><th class="code"></th></tr></thead><tbody><tr id="section-1"><td class="docs"><div class="pilwrap"><a href="#section-1" class="pilcrow">&#182;</a></div><h1>JavaScript notes</h1>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-2"><td class="docs"><div class="pilwrap"><a href="#section-2" class="pilcrow">&#182;</a></div><h2>Types</h2>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-3"><td class="docs"><div class="pilwrap"><a href="#section-3" class="pilcrow">&#182;</a></div><p>JavaScript's has 5 primitive types: <code>number</code>, <code>string</code>, <code>boolean</code>, <code>null</code>, and <code>undefined</code>.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">aNumber</span> <span class="o">=</span> <span class="mf">1.3</span><span class="p">,</span>
+    <span class="nx">anotherNumber</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nx">aString</span> <span class="o">=</span> <span class="s1">&#39;Hello world&#39;</span><span class="p">,</span>
+    <span class="nx">theTruth</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">nothing</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">evenLess</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span></pre></div></td></tr><tr id="section-4"><td class="docs"><div class="pilwrap"><a href="#section-4" class="pilcrow">&#182;</a></div><p>Everything else is an <em>object</em>, including functions and arrays.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">anObjectLiteral</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">property</span><span class="o">:</span> <span class="s1">&#39;value&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;property-with-dashes&#39;</span><span class="o">:</span> <span class="s1">&#39;another value&#39;</span><span class="p">,</span>
+    <span class="nx">anotherProperty</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello from an object method&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-5"><td class="docs"><div class="pilwrap"><a href="#section-5" class="pilcrow">&#182;</a></div><p>Functions can be assigned to variables and passed around just as any other object (which they are).</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">aFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span> <span class="c1">// does not do very much</span></pre></div></td></tr><tr id="section-6"><td class="docs"><div class="pilwrap"><a href="#section-6" class="pilcrow">&#182;</a></div><p>Since functions are objects, they can have properties as well.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">aFunction</span><span class="p">.</span><span class="nx">fieldName</span> <span class="o">=</span> <span class="s1">&#39;Yet another value&#39;</span><span class="p">;</span></pre></div></td></tr><tr id="section-7"><td class="docs"><div class="pilwrap"><a href="#section-7" class="pilcrow">&#182;</a></div><p>And methods...</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">aFunction</span><span class="p">.</span><span class="nx">method</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hello from a function object method&#39;</span><span class="p">);</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-8"><td class="docs"><div class="pilwrap"><a href="#section-8" class="pilcrow">&#182;</a></div><p>Objects are always passed by reference, they are never copied.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Object 1&#39;</span> <span class="p">},</span>
+    <span class="nx">obj2</span> <span class="o">=</span> <span class="nx">obj1</span><span class="p">;</span>
+<span class="nx">obj2</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Object 2&#39;</span><span class="p">;</span>     <span class="c1">// &lt;-- obj1.name is &#39;Object 2&#39; now, as both variables reference the same object</span></pre></div></td></tr><tr id="section-9"><td class="docs"><div class="pilwrap"><a href="#section-9" class="pilcrow">&#182;</a></div><h2>Scope and Context</h2>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-10"><td class="docs"><div class="pilwrap"><a href="#section-10" class="pilcrow">&#182;</a></div><p>In contrast to most languages with C syntax, JavaScript has function scope (or lexical scope)
+instead of block scope. That means a variable lives in the scope of <em>the function where it is declared</em>.
+What is more, variable declarations are "hoisted" to the beginning of the current scope, which can
+sometimes lead to unexpected results. Therefore, it is a good practice to declare all needed variables
+at the beginning of a function.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">myFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>           <span class="c1">// &lt;-- a new scope starts here</span>
+    <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>                   <span class="c1">// also `result` from further down is implicitly declared here (set to undefined)</span>
+
+    <span class="kd">function</span> <span class="nx">nested</span><span class="p">()</span> <span class="p">{</span>                 <span class="c1">// &lt;-- a nested scope starts here, which has access to the parent scope</span>
+        <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>                     <span class="c1">// &lt;-- local variable `b` shadows variable from parent scope</span>
+            <span class="nx">c</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">a</span> <span class="o">+=</span> <span class="nx">b</span><span class="p">;</span>                            <span class="c1">// &lt;-- here, c is undefined</span>
+
+    <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">nested</span><span class="p">();</span>             <span class="c1">// variable declaration is hoisted to beginning of scope, `result` is set to 17</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-11"><td class="docs"><div class="pilwrap"><a href="#section-11" class="pilcrow">&#182;</a></div><p>Variables do not need to be declared using a <code>var</code> statement. If <code>var</code> is omitted, <strong>they will become global variables</strong>.
+Therefore, always use the var statement unless you have a very good reason not to do so.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">creatingGlobals</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">aLocalVariable</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="nx">aGlobalVariable</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>              <span class="c1">// this can be accessed outside this function, because it is a global variable!</span>
+
+    <span class="nx">$</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>                             <span class="c1">// Oops, accidentally overwriting jQuery...</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-12"><td class="docs"><div class="pilwrap"><a href="#section-12" class="pilcrow">&#182;</a></div><p>When a function is invoked, the special variable <code>this</code> holds the <em>function execution context</em>.
+For object member functions, this is typically the object itself. For DOM event handler functions in
+the browser, <code>this</code> typically refers to the event's target DOM element. When invoking a function
+through <code>call()</code> or <code>apply()</code>, the function context (i.e. the value of <code>this</code>) can be set to an arbitrary
+object.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">myFunctionWithContext</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>                    <span class="c1">// the value of `this` is defined when the function is called</span>
+
+    <span class="kd">function</span> <span class="nx">nested</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">self</span> <span class="o">===</span> <span class="k">this</span><span class="p">)</span> <span class="p">{</span>            <span class="c1">// this `this` is defined when `nested()` is called and usually does not equal the parent scope `this`!</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;You were lucky&#39;</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Beware&#39;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="nx">nested</span><span class="p">();</span>                          <span class="c1">// prints &#39;You were lucky&#39; if the outer function is invoked as myFunctionWithContext()</span>
+
+    <span class="nx">nested</span><span class="p">.</span><span class="nx">call</span><span class="p">({});</span>                   <span class="c1">// prints &#39;Beware&#39;</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-13"><td class="docs"><div class="pilwrap"><a href="#section-13" class="pilcrow">&#182;</a></div><p>In the browser, <code>this</code> <strong>refers to the window object</strong> unless a function is invoked as an object method or <code>this</code> is
+explicitly set to another value.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Hi, my name is&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">greet</span><span class="p">();</span>                               <span class="c1">// prints &#39;Hi, my name is undefined&#39; (`this` refers to `window`)</span>
+<span class="nx">greet</span><span class="p">.</span><span class="nx">call</span><span class="p">({</span> <span class="nx">firstName</span><span class="o">:</span> <span class="s1">&#39;Bob&#39;</span> <span class="p">});</span>      <span class="c1">// prints &#39;Hi, my name is Bob&#39;</span></pre></div></td></tr><tr id="section-14"><td class="docs"><div class="pilwrap"><a href="#section-14" class="pilcrow">&#182;</a></div><p>To ensure a certain execution context, a function can be bound to a specific value of this. This creates a new
+function object that, when called, calls the original function with the supplied argument as value of <code>this</code>.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">bobGreets</span> <span class="o">=</span> <span class="nx">greet</span><span class="p">.</span><span class="nx">bind</span><span class="p">({</span> <span class="nx">firstName</span><span class="o">:</span> <span class="s1">&#39;Bob&#39;</span> <span class="p">});</span>
+<span class="nx">bobGreets</span><span class="p">();</span>                           <span class="c1">// prints &#39;Hi, my name is Bob&#39;</span>
+<span class="nx">bobGreets</span><span class="p">.</span><span class="nx">call</span><span class="p">({});</span>                    <span class="c1">// prints &#39;Hi, my name is Bob&#39;</span></pre></div></td></tr><tr id="section-15"><td class="docs"><div class="pilwrap"><a href="#section-15" class="pilcrow">&#182;</a></div><h3>Closure</h3>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-16"><td class="docs"><div class="pilwrap"><a href="#section-16" class="pilcrow">&#182;</a></div><p>Nested functions have access to their parent scope (except for <code>this</code>). This leads to an interesting case
+when a nested function has longer lifetime than its parent function, e.g., when the nested function is
+returned.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">foobar</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;I was called &#39;</span> <span class="o">+</span> <span class="nx">count</span> <span class="o">+</span> <span class="s1">&#39; times&#39;</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="p">}();</span>                                   <span class="c1">// we immediately invoke the outer function, so `foobar` holds the returned inner function</span></pre></div></td></tr><tr id="section-17"><td class="docs"><div class="pilwrap"><a href="#section-17" class="pilcrow">&#182;</a></div><p>Returning the nested function makes it available for later invocation. Therefore, the local variable <code>count</code> must not
+be garbage collected. Instead, the parent scope is attached to the returned function in order to be accessible when
+the function is invoked, creating a closure. This is called the <em>scope chain</em>.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">foobar</span><span class="p">();</span>                              <span class="c1">// prints &#39;I was called 1 times&#39;</span>
+<span class="nx">foobar</span><span class="p">();</span>                              <span class="c1">// prints &#39;I was called 2 times&#39;</span>
+<span class="nx">foobar</span><span class="p">();</span>                              <span class="c1">// prints &#39;I was called 3 times&#39;</span>
+<span class="nx">foobar</span><span class="p">();</span>                              <span class="c1">// prints &#39;I was called 4 times&#39;</span></pre></div></td></tr><tr id="section-18"><td class="docs"><div class="pilwrap"><a href="#section-18" class="pilcrow">&#182;</a></div><p>Closure and immediately invoked functions can be used to create private variables (which otherwise do not exist in JavaScript)</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Counter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">getValue</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">value</span><span class="p">;</span> <span class="p">},</span>
+        <span class="nx">increment</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">value</span><span class="o">++</span><span class="p">;</span> <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}();</span>                                   <span class="c1">// immediate invocation of the anonymous function</span></pre></div></td></tr><tr id="section-19"><td class="docs"><div class="pilwrap"><a href="#section-19" class="pilcrow">&#182;</a></div><h2>The Prototype Chain</h2>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-20"><td class="docs"><div class="pilwrap"><a href="#section-20" class="pilcrow">&#182;</a></div><p>Every object is linked to a prototype object, which serves as a blueprint for the object's behaviour.
+When a property or a method cannot be found in an object itself, the interpreter tries to find it in the object's
+prototype–and the prototype's prototype, and the prototype's prototype's prototype and so on. This is called
+the prototype chain.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">myArray</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>               <span class="c1">// no direct members `join` nor `hasOwnProperty`</span>
+<span class="nx">myArray</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>                     <span class="c1">// calls `Array.prototype.join`, returning &#39;1,2,3&#39;</span></pre></div></td></tr><tr id="section-21"><td class="docs"><div class="pilwrap"><a href="#section-21" class="pilcrow">&#182;</a></div><p>Object literals are linked to <code>Object.prototype</code>, i.e. their prototype refers to <code>Object.prototype</code>.
+Arrays are linked to <code>Array.prototype</code>, which itself is linked to <code>Object.prototype</code>.</p>
+</td><td class="code"><div class="highlight"><pre><span class="nx">myArray</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">&#39;join&#39;</span><span class="p">);</span>        <span class="c1">// calls `Object.prototype.hasOwnProperty`, returning false</span></pre></div></td></tr><tr id="section-22"><td class="docs"><div class="pilwrap"><a href="#section-22" class="pilcrow">&#182;</a></div><p>Functions are linked to <code>Function.prototype</code>, which itself is linked to <code>Object.prototype</code> again.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">myFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;You called myFunc with&#39;</span><span class="p">,</span> <span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">myFunc</span><span class="p">.</span><span class="nx">apply</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>                    <span class="c1">// calls `Function.prototype.apply`</span></pre></div></td></tr><tr id="section-23"><td class="docs"><div class="pilwrap"><a href="#section-23" class="pilcrow">&#182;</a></div><h3>Constructor invocation</h3>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-24"><td class="docs"><div class="pilwrap"><a href="#section-24" class="pilcrow">&#182;</a></div><p>There is no class concept in JavaScript. However, functions can be invoked using the <code>new</code> keyword. This creates
+a new object whose prototype is set to the function's <code>prototype</code> member.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Button</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">label</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">label</span> <span class="o">=</span> <span class="nx">label</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="nx">Button</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">click</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;You clicked button &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">label</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">btn</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Button</span><span class="p">(</span><span class="s1">&#39;Cancel&#39;</span><span class="p">);</span>        <span class="c1">// by convention, functions meant to be called as constructors begin with a capital letter</span>
+<span class="nx">btn</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>                           <span class="c1">// prints &#39;You clicked button Cancel&#39;</span></pre></div></td></tr><tr id="section-25"><td class="docs"><div class="pilwrap"><a href="#section-25" class="pilcrow">&#182;</a></div><h3>Prototypal Inheritance</h3>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-26"><td class="docs"><div class="pilwrap"><a href="#section-26" class="pilcrow">&#182;</a></div><p>In JavaScript, object inheritance can be achieved in various ways. The language can be used to mimic the concept
+of classes and classical inheritance. The prototype chain, however, provides a powerful means of establishing
+inheritance relations directly between objects.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">createDerivedObject</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">baseObj</span><span class="p">)</span> <span class="p">{</span>     <span class="c1">// helper function to set up &#39;inheritance&#39; prototype chain</span>
+    <span class="kd">var</span> <span class="nx">F</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{};</span>                        <span class="c1">// empty constructor function</span>
+    <span class="nx">F</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nx">baseObj</span><span class="p">;</span>                        <span class="c1">// use `baseObj` as the derived object&#39;s prototype</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">F</span><span class="p">();</span>                               <span class="c1">// create and return derived object</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-27"><td class="docs"><div class="pilwrap"><a href="#section-27" class="pilcrow">&#182;</a></div><p>Using this pattern, any object literal can serve as a base object.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">aWidget</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">show</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Showing widget &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-28"><td class="docs"><div class="pilwrap"><a href="#section-28" class="pilcrow">&#182;</a></div><p>We only specify the behavioural differences in the derived object, relying on the prototype chain for the common behaviour.</p>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">aClickableWidget</span> <span class="o">=</span> <span class="nx">createDerivedObject</span><span class="p">(</span><span class="nx">aWidget</span><span class="p">);</span>
+<span class="nx">aClickableWidget</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Click Widget&#39;</span><span class="p">;</span>
+<span class="nx">aClickableWidget</span><span class="p">.</span><span class="nx">click</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;You clicked widget &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="nx">aClickableWidget</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>               <span class="c1">// calls `aClickableWidget.prototype.show`, which is identical to `aWidget.show`</span></pre></div></td></tr><tr id="section-29"><td class="docs"><div class="pilwrap"><a href="#section-29" class="pilcrow">&#182;</a></div><p>There are various other ways of achieving inheritance in JavaScript, some of them allowing for truly private member
+variables and references to base object members (i.e., a <code>super()</code> functionality). For an overview,
+see <a href="http://www.oreilly.de/catalog/9780596517748">"JavaScript: The Good Parts" by Douglas Crockford</a>.</p>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-30"><td class="docs"><div class="pilwrap"><a href="#section-30" class="pilcrow">&#182;</a></div><h1>Useful tools</h1>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-31"><td class="docs"><div class="pilwrap"><a href="#section-31" class="pilcrow">&#182;</a></div><ul>
+<li><a href="http://www.jshint.com">JSHint</a> is a JavaScript code sniffer and quality tool. It is a fork of Douglas Crockford's
+original JSLint, which is often considered too biased by Crockford's own style. It integrates nicely with most
+current IDEs.</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">anotherFunction</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">anAccidentallyGlobalVariable</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>      <span class="c1">// JSHint will complain about implicitly declared global variable here!</span>
+<span class="p">};</span></pre></div></td></tr><tr id="section-32"><td class="docs"><div class="pilwrap"><a href="#section-32" class="pilcrow">&#182;</a></div><ul>
+<li><a href="http://gruntjs.com">Grunt</a> is a JavaScript task runner that can be used to automate every-day (build) tasks with
+the help of JavaScript and <a href="http://nodejs.org">NodeJS</a></li>
+<li>Unit testing and test runners: see testing.js</li>
+</ul>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr><tr id="section-33"><td class="docs"><div class="pilwrap"><a href="#section-33" class="pilcrow">&#182;</a></div><h1>References</h1>
+
+<ol>
+<li><a href="http://www.oreilly.de/catalog/9780596517748">JavaScript: The Good Parts by Douglas Crockford</a> is a very
+good read on the good, bad and awful things in JavaScript.</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">MDN JavaScript Reference</a> is a helpful
+language reference and documentation.</li>
+<li><a href="http://devdocs.io">DevDocs</a> is a customizable combined API reference of many current web frameworks.</li>
+</ol>
+</td><td class="code"><div class="highlight"><pre></pre></div></td></tr></tbody></table><div id="generated">generated Wed Mar 12 2014 17:42:44 GMT+0100 (CET)  </div></div></body></html>
