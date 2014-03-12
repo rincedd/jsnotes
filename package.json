@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "description": "",
   "author": "Gerd Zschaler <gzschaler@googlemail.com>",
+  "repository": {
+      "type": "git",
+      "url": "git://github.com/rincedd/jsnotes"
+  },
   "main": "app.js",
   "dependencies": {},
   "devDependencies": {
